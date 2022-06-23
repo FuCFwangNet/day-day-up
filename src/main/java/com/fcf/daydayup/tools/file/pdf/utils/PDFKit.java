@@ -13,9 +13,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
-import org.xhtmlrenderer.pdf.ITextRenderer;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.nio.charset.Charset;
 
@@ -75,27 +73,24 @@ public class PDFKit {
      *
      * @param ftlPath  ftl模板文件的路径（不含文件名）
      * @param data     输入到FTL中的数据
-     * @param response HttpServletResponse
+     * @param response OutputStream
      * @return
      */
     public OutputStream exportToResponse(String ftlPath, Object data,
-                                         HttpServletResponse response) {
+                                         OutputStream response) {
 
         String html = FreeMarkerUtil.getContent(ftlPath, data);
 
         try {
-            OutputStream out = null;
-            ITextRenderer render = null;
-            out = response.getOutputStream();
             //设置文档大小
             Document document = new Document(PageSize.A4);
-            PdfWriter writer = PdfWriter.getInstance(document, out);
+            PdfWriter writer = PdfWriter.getInstance(document, response);
             //设置页眉页脚
             PDFBuilder builder = new PDFBuilder(headerFooterBuilder, data);
             writer.setPageEvent(builder);
             //输出为PDF文件
             convertToPDF(writer, document, html);
-            return out;
+            return response;
         } catch (Exception ex) {
             throw new PDFException("PDF export to response fail", ex);
         }

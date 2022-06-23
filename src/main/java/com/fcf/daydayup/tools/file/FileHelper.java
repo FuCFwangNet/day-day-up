@@ -1,6 +1,5 @@
 package com.fcf.daydayup.tools.file;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.OutputStream;
 
 public interface FileHelper {
@@ -16,10 +15,9 @@ public interface FileHelper {
     /**
      * 根据文件名称，将生成文本以数据流的形式输出
      *
-     * @param ftlPath  模板路径
-     * @param data     数据
-     * @param response 输入流
+     * @param ftlPath 模板路径
+     * @param data    数据
      * @return 输出流
      */
-    OutputStream exportToResponse(String ftlPath, Object data, HttpServletResponse response);
+    OutputStream exportToResponse(String ftlPath, Object data);
 }
