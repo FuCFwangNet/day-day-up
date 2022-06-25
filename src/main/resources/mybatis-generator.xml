@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- mvn mybatis-generator:generate -Dmybatis.generator.overwrite=true -->
+<generatorConfiguration>
+
+    <!-- defaultModelType="flat" -->
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+
+        <property name="beginningDelimiter" value="`" />
+        <property name="endingDelimiter" value="`" />
+        <property name="autoDelimitKeywords" value="true" />
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="com.fcf.daydayup.service.BaseMapper"/>
+            <property name="caseSensitive" value="true"/>
+            <property name="lombok" value="Data"/>
+        </plugin>
+
+        <commentGenerator >
+            <property name="suppressAllComments" value="true" />
+            <property name="suppressDate" value="true" />
+            <property name="addRemarkComments" value="true" />
+        </commentGenerator>
+
+        <!-- 数据库连接 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/ddu?useUnicode=true&amp;characterEncoding=utf-8"
+                        userId="root" password="123456">
+            <property name="useInformationSchema" value="true"/>
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!-- model生成器 -->
+        <javaModelGenerator targetPackage="com.fcf.daydayup.face.model"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+            <property name="useInformationSchema" value="true"/>
+        </javaModelGenerator>
+
+        <!-- mapper xml生成器 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!-- dao接口生成器 -->
+        <javaClientGenerator targetPackage="com.fcf.daydayup.service.dao"
+                             targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <table tableName="file_download_blob" domainObjectName="FileDownloadBlob"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+        </table>
+        <table tableName="file_downlad_task" domainObjectName="FileDownloadTask"
+               enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+        </table>
+
+    </context>
+</generatorConfiguration>

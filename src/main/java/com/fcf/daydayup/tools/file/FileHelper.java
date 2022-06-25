@@ -20,4 +20,6 @@ public interface FileHelper {
      * @return 输出流
      */
     OutputStream exportToResponse(String ftlPath, Object data);
+
+    byte[] export2File(String templateName,Object data);
 }

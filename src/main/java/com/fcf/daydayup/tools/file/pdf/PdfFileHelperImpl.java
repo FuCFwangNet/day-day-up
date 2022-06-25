@@ -49,4 +49,9 @@ public enum PdfFileHelperImpl implements FileHelper {
             return null;
         }
     }
+
+    @Override
+    public byte[] export2File(String templateName, Object data) {
+        return new byte[0];
+    }
 }

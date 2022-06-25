@@ -19,7 +19,6 @@ public enum WordFileHelperImpl implements FileHelper {
 
     @Override
     public OutputStream exportToResponse(String ftlPath, Object data) {
-        String fileName = "测试.docx";
         ClassPathResource resource = new ClassPathResource(File.separator + "templates" + File.separator + "test_template.docx");
         try {
             InputStream inputStream = resource.getInputStream();
@@ -29,6 +28,22 @@ public enum WordFileHelperImpl implements FileHelper {
             bos.flush();
             PoitlIOUtils.closeQuietlyMulti(template, bos);
             return bos;
+        } catch (IOException e) {
+            throw new RuntimeException("生成word失败!");
+        }
+    }
+
+    @Override
+    public byte[] export2File(String templateName, Object data) {
+        ClassPathResource resource = new ClassPathResource(File.separator + "templates" + File.separator + templateName);
+        try {
+            InputStream inputStream = resource.getInputStream();
+            XWPFTemplate template = XWPFTemplate.compile(inputStream).render(data);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream(1024 * 8);
+            template.write(bos);
+            bos.flush();
+            PoitlIOUtils.closeQuietlyMulti(template, bos);
+            return bos.toByteArray();
         } catch (IOException e) {
             throw new RuntimeException("生成word失败!");
         }

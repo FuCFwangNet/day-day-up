@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fcf.daydayup.service.dao.FileDownloadTaskMapper">
+  <resultMap id="BaseResultMap" type="com.fcf.daydayup.face.model.FileDownloadTask">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="file_title" jdbcType="VARCHAR" property="fileTitle" />
+    <result column="file_type" jdbcType="VARCHAR" property="fileType" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="blob_id" jdbcType="INTEGER" property="blobId" />
+    <result column="create_dt" jdbcType="TIMESTAMP" property="createDt" />
+  </resultMap>
+</mapper>
